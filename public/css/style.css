@@ -1,0 +1,34 @@
+input[type="file"],[type="submit"] {
+  display: none;
+}
+
+#button {
+  background-color: #fff3d3;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 10px;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+#button:hover {
+  background-color: #ffe293;
+}
+
+.table {
+  border-collapse: collapse;
+  border: solid 1px black; 
+  width: 50%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  border: solid 1px black; 
+}
+
+th {
+  background: linear-gradient(to bottom, #fde091 0%, #faca2b 100%);
+}
+
+tr:nth-child(even){background-color: #f5eeee}
