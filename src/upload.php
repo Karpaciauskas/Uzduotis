@@ -1,4 +1,6 @@
 <?php
+  include 'functions.php';
+  ///Including functions
   if($_FILES["fileToUpload"]["size"]>0) {
     ///Checking if file was uploaded
     $target_file = basename($_FILES["fileToUpload"]["name"]);
@@ -12,53 +14,25 @@
     }
     else {
       echo "File ". $target_file . " information has been imported to the table:";
-      ?><table class="table">
-          <thead>
-            <tr>
-              <th>First Name</td>
-              <th>Age</td>
-              <th>Gender</td>
-            </tr>
-          </thead>
-        <tbody><?php
+      headerTable();
       ///Creating table header
-      if($FileType == "csv") { 
-      ///Checking if file type is CSV
-        fgetcsv($handle);
-        while (($row = fgetcsv($handle)) !== false) { ?>
-          <tr>
-            <td><?php echo $row[0]; ?></td>
-            <td><?php echo $row[1]; ?></td>
-            <td><?php echo $row[2]; ?></td>
-          </tr><?php 
-        }
-        fclose($handle); 
-      }
-      if($FileType == "json") {
-      ///Checking if file type is JSON
-        $json = json_decode($contents); 
-        foreach($json as $key => $item): ?>
-          <tr>
-            <td><?php echo $item->first_name; ?></td>
-            <td><?php echo $item->age; ?></td>
-            <td><?php echo $item->gender; ?></td>
-          </tr>
-          <?php endforeach; 
-      }
-      if($FileType == "xml") {
+      switch($FileType){
+      case "csv": 
+        ///Checking if file type is CSV
+        csvTable($handle);
+        break;
+      case "json":
+        ///Checking if file type is JSON
+        jsonTable($contents);
+        break;
+      case "xml":
       ///Checking if file type is XML
-        $xml = simplexml_load_string($contents); 
-        foreach ($xml as $item) : ?>
-          <tr>
-            <td><?php echo $item->first_name; ?></td>
-            <td><?php echo $item->age; ?></td>
-            <td><?php echo $item->gender; ?></td>
-          </tr>
-          <?php endforeach; 
-      }?>
-      </tbody>
-      </table>
-      <?php
+        xmlTable($contents);
+        break;
+    }?>
+    </tbody>
+    </table>
+    <?php
     }
   }
   else echo "No file was uploaded";

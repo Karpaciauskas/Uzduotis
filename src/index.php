@@ -13,6 +13,8 @@
       </label>
       <input id="showData" type="submit" value="Show data" name="submit">
     </form><br>
-    <?php if(isset($_POST['submit'])) include("upload.php"); ?>
+    <?php if(isset($_POST['submit'])) include("upload.php"); 
+    ///Checking if file was submitted
+    ?>
   </body>
 </html>
